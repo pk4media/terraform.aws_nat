@@ -55,3 +55,6 @@ variable "bastion_user" {
 variable "bastion_security_group_id" {
   description = "The Security Group used to allow the bastion to connect"
 }
+variable "bastion_private_key" {
+  description = "The private key to connection to bastion with"
+}

@@ -80,6 +80,7 @@ resource "aws_instance" "nat" {
     private_key  = "${var.private_key}"
     bastion_host = "${var.bastion_host}"
     bastion_user = "${var.bastion_user}"
+    bastion_private_key = "${var.bastion_private_key}"
   }
 
   provisioner "remote-exec" {
@@ -99,8 +100,7 @@ resource "aws_route_table" "nat" {
   vpc_id = "${var.vpc_id}"
 
   route {
-    cidr_block = "0.0.0.0/0"
-    #nat_gateway_id = "${element(split(",", var.nat_gateway_ids), count.index)}"
+    cidr_block  = "0.0.0.0/0"
     instance_id = "${element(aws_instance.nat.*.id, count.index)}"
   }
 
